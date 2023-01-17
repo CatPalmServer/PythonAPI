@@ -302,3 +302,19 @@ class PalmIcon:
     def __init__(self, palm):
         self._palm = palm
         pass
+
+    def get(self):
+        return self._palm.request(f"icon", "get")
+
+    def add(self, world, x, z, type, name, visible=True):
+        self._palm.delay("icon get", 0.5)
+        result = self._palm.request(f"icon", "put", {
+            "world": world,
+            "x": x,
+            "z": z,
+            "type": type,
+            "name": name,
+            "visible": visible
+        })
+        self._palm.let("icon get")
+        return result
