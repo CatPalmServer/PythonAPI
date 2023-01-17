@@ -307,7 +307,7 @@ class PalmIcon:
         return self._palm.request(f"icon", "get")
 
     def add(self, world, x, z, type, name, visible=True):
-        self._palm.delay("icon get", 0.5)
+        self._palm.delay("icon put", 0.5)
         result = self._palm.request(f"icon", "put", {
             "world": world,
             "x": x,
@@ -316,5 +316,5 @@ class PalmIcon:
             "name": name,
             "visible": visible
         })
-        self._palm.let("icon get")
+        self._palm.let("icon put")
         return result
