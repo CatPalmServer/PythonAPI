@@ -256,6 +256,9 @@ class PalmSearch:
     def block(self, world, x, y, z, page=0):
         return self._palm.request(f"search/block/{world}/{x},{y},{z}/{page}", "get")
 
+    def online(self, world, x_a, y_a, z_a, x_b, y_b, z_b):
+        return self._palm.request(f"search/online/{world}/{x_a},{y_a},{z_a}/{x_b},{y_b},{z_b}", "get")
+
     def player(self, name=None, nick=None, uuid=None, discord=None):
         if name is not None:
             return self._palm.request(f"search/player/name", "post", name)
