@@ -1,5 +1,5 @@
 """
-版本 2023/01/07
+版本 2023/01/18
 協議 https://catpalm.gitbook.io/webapi/
 """
 import json
@@ -54,7 +54,6 @@ class Client:
                 player_phone=None,
                 player_message=None,
                 player_nick=None,
-                notifier_call=None,
                 ban_add=None,
                 ban_remove=None,
                 group_message=None,
@@ -79,8 +78,6 @@ class Client:
             events.append("player_message")
         if player_nick is not None:
             events.append("player_nick")
-        if notifier_call is not None:
-            events.append("notifier_call")
         if ban_add is not None:
             events.append("ban_add")
         if ban_remove is not None:
@@ -118,8 +115,6 @@ class Client:
                 player_message(obj)
             elif fun == "PLAYER_NICK":
                 player_nick(obj)
-            elif fun == "NOTIFIER_CALL":
-                notifier_call(obj)
             elif fun == "BAN_ADD":
                 ban_add(obj)
             elif fun == "BAN_REMOVE":
