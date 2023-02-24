@@ -8,7 +8,7 @@ import time
 import requests
 from websocket import WebSocketApp
 
-_host = "web.catpalm.net"
+_host = "api.catpalm.net"
 
 
 # 主體
