@@ -1,5 +1,5 @@
 """
-版本 2023/01/18
+版本 2023/03/08
 協議 https://catpalm.gitbook.io/webapi/
 """
 import json
@@ -19,6 +19,9 @@ class Client:
         self.valve = {}
         pass
 
+    def controller(self, name):
+        return PalmController(self, name)
+
     def group(self, id):
         return PalmGroup(self, id)
 
@@ -36,6 +39,9 @@ class Client:
 
     def server(self):
         return PalmServer(self)
+
+    def test(self):
+        return PalmTest(self)
 
     def icon(self):
         return PalmIcon(self)
@@ -168,6 +174,23 @@ class Client:
         return request.status_code, request.content
 
 
+# https://catpalm.gitbook.io/webapi/controller
+class PalmController:
+    def __init__(self, palm, name):
+        self._palm = palm
+        self.name = name
+        pass
+
+    def called(self):
+        return self._palm.request(f"controller/{self.name}/call", "get")
+
+    def call(self):
+        return self._palm.request(f"controller/{self.name}/call", "put")
+
+    def received(self):
+        return self._palm.request(f"controller/{self.name}/receive", "get")
+
+
 # https://catpalm.gitbook.io/webapi/group
 class PalmGroup:
     def __init__(self, palm, id):
@@ -293,6 +316,49 @@ class PalmServer:
         result = self._palm.request(f"server/statistics", "get")
         self._palm.let("server/statistics get")
         return result
+
+
+# https://catpalm.gitbook.io/webapi/test
+class PalmTest:
+    def __init__(self, palm):
+        self._palm = palm
+        pass
+
+    def license(self,
+                group_message_put=False,
+                group_message_gateway=False,
+                land_change_permission=False,
+                player_online_location=False,
+                player_message_put=False,
+                player_message_gateway=False,
+                server_message_put=False,
+                icon_get=False,
+                icon_put=False):
+        licenses = []
+        if group_message_put:
+            licenses.append("group_message_put")
+        if group_message_gateway:
+            licenses.append("group_message_gateway")
+        if land_change_permission:
+            licenses.append("land_change_permission")
+        if player_online_location:
+            licenses.append("player_online_location")
+        if player_message_put:
+            licenses.append("player_message_put")
+        if player_message_gateway:
+            licenses.append("player_message_gateway")
+        if server_message_put:
+            licenses.append("server_message_put")
+        if icon_get:
+            licenses.append("icon_get")
+        if icon_put:
+            licenses.append("icon_put")
+        call = ""
+        for event in licenses:
+            if len(call) > 0:
+                call += ","
+            call += event
+        return self._palm.request(f"test/license/{call}", "get")
 
 
 # https://catpalm.gitbook.io/webapi/icon
