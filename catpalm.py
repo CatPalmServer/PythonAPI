@@ -8,7 +8,7 @@ import time
 import requests
 from websocket import WebSocketApp
 
-_host = "api.catpalm.net"
+_host = "catpalm.net"
 
 
 # 主體
@@ -133,7 +133,7 @@ class Client:
                 group_quit(obj)
 
         socket = WebSocketApp(
-            f"wss://{_host}/gateway/{call}",
+            f"wss://{_host}/api/gateway/{call}",
             header={"Authorization": self.authorization()},
             on_message=on_message,
             on_open=(lambda app: on_open()) if on_open is not None else None,
@@ -167,7 +167,7 @@ class Client:
             headers["Content-Type"] = "application/json"
         request = requests.request(
             method,
-            f"https://{_host}/{target}",
+            f"https://{_host}/api/{target}",
             data=output,
             headers=headers
         )
