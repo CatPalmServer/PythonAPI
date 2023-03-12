@@ -1,6 +1,6 @@
 """
-版本 2023/03/08
-協議 https://catpalm.gitbook.io/webapi/
+Version 2023/03/08
+Protocol https://catpalm.gitbook.io/webapi/
 """
 import json
 import time
@@ -11,7 +11,6 @@ from websocket import WebSocketApp
 _host = "catpalm.net"
 
 
-# 主體
 class Client:
     def __init__(self, id, token):
         self.id = id

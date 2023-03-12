@@ -1,6 +1,6 @@
-# 貓掌 Python 版本的 API
-### 協議規範請見
+# Catpalm Python Version API
+### Protocol specifications can be found at
 > https://catpalm.gitbook.io/webapi/
 
-### 跳轉到主要文件
+### Jump to main file
 > [catpalm.py](catpalm.py)
