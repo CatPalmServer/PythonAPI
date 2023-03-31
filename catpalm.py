@@ -136,8 +136,8 @@ class Client:
             header={"Authorization": self.authorization()},
             on_message=on_message,
             on_open=(lambda app: on_open()) if on_open is not None else None,
-            on_error=(lambda app: on_error()) if on_open is not None else None,
-            on_close=(lambda app, ex: on_close(ex)) if on_open is not None else None,
+            on_error=(lambda app, ex: on_error(ex)) if on_open is not None else None,
+            on_close=(lambda app, code, msg: on_close(code, msg)) if on_open is not None else None,
         )
         return socket.run_forever(ping_interval=10, reconnect=5)
 
