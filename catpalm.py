@@ -262,9 +262,9 @@ class PalmPlayer:
     def info(self):
         return self._palm.request(f"player/{self.id}/info", "get")
 
-    def send(self, text):
+    def send(self, text, lang="zh_Tw"):
         self._palm.delay("player/message put", 0.2)
-        result = self._palm.request(f"player/{self.id}/message", "put", text)
+        result = self._palm.request(f"player/{self.id}/message/{lang}", "put", text)
         self._palm.let("player/message put")
         return result
 
